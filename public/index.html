@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameStats | Elite Leaderboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1 onclick="renderHome()">TOP<span>STATS</span></h1>
+            <nav id="main-nav">
+                <button onclick="changeView('kills')" id="btn-kills">KILLS RANKING</button>
+                <button onclick="changeView('deaths')" id="btn-deaths">DEATHS RANKING</button>
+            </nav>
+        </header>
+
+        <main id="view-container">
+            <div class="welcome-screen fade-in">
+                <h2>RANKING GLOBAL</h2>
+                <p>Selecciona una categoría para ver a los mejores jugadores.</p>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
