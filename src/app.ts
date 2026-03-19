@@ -85,18 +85,32 @@ app.get('/api/player/:id', async (req: Request, res: Response) => {
 });
 
 app.post('/api/player', async (req: Request, res: Response) => {
-    const { name, kills, deaths } = req.body;
-    if (!name || kills === undefined || deaths === undefined) {
-        return res.status(400).json({ error: 'Missing fields' });
-    }
+    // CHANGE 1: Support for single object or array
+    const playersToProcess: Player[] = Array.isArray(req.body) ? req.body : [req.body];
     const data = await read();
-    const id = data.nId.toString();
+    const processed = [];
 
-    data.players[id] = { name, kills, deaths };
-    data.nId++;
+    for (const p of playersToProcess) {
+        if (!p.name || p.kills === undefined || p.deaths === undefined) continue;
+
+        // CHANGE 2: Logic for Upsert (Update if ID exists, Create if not)
+        let targetId = p.id;
+
+        if (targetId && data.players[targetId]) {
+            data.players[targetId] = { name: p.name, kills: p.kills, deaths: p.deaths };
+        } else {
+            targetId = data.nId.toString();
+            data.players[targetId] = { name: p.name, kills: p.kills, deaths: p.deaths };
+            data.nId++;
+        }
+
+        processed.push({ id: targetId, ...data.players[targetId] });
+    }
+
+    if (processed.length === 0) return res.status(400).json({ error: 'No valid player data provided' });
 
     await write(data);
-    res.status(201).json({ id, ...data.players[id] });
+    res.status(201).json(processed.length === 1 ? processed[0] : processed);
 });
 
 app.listen(port, () => console.log(`🚀 Server ready at http://localhost:${port}`));
