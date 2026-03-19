@@ -1,13 +1,26 @@
 const viewContainer = document.getElementById('view-container');
 let currentView = 'kills';
 
+const API_KEY = "mi_clave_secreta_123";
+
+const headers = {
+    'Content-Type': 'application/json',
+    'x-api-key': API_KEY
+};
+
 async function fetchLeaderboard(type, page = 1) {
-    const res = await fetch(`/api/leaderboard/${type}?page=${page}`);
+    const res = await fetch(`/api/leaderboard/${type}?page=${page}`, {
+        method: 'GET',
+        headers: headers
+    });
     return await res.json();
 }
 
 async function fetchPlayer(id) {
-    const res = await fetch(`/api/player/${id}`);
+    const res = await fetch(`/api/player/${id}`, {
+        method: 'GET',
+        headers: headers
+    });
     return await res.json();
 }
 

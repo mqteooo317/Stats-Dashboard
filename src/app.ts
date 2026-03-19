@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import fs from 'fs/promises';
 import path from 'path';
 import cors from 'cors';
@@ -7,9 +7,22 @@ const app = express();
 const port = 3000;
 const FILE = path.join(__dirname, '../players.json');
 
+const API_KEY = "mi_clave_secreta_123";
+
+const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+    const userKey = req.headers['x-api-key'];
+
+    if (userKey === API_KEY) {
+        next();
+    } else {
+        res.status(401).json({ error: 'Acceso denegado: API Key inválida o ausente' });
+    }
+};
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
+app.use('/api', authMiddleware);
 
 interface Player {
     id?: string;
