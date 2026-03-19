@@ -3,7 +3,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-Profile-181717?style=for-the-badge&logo=github)](https://github.com/mqteooo317)
 [![Discord](https://img.shields.io/badge/Discord-User-5865F2?style=for-the-badge&logo=discord)](https://discord.com/users/1279870617197482055)
 [![Repository](https://img.shields.io/badge/Repository-Source-0052FF?style=for-the-badge&logo=git)](https://github.com/mqteooo317/Stats-Dashboard)
-[![Plugin](https://img.shields.io/badge/System-Dashboard-FF4500?style=for-the-badge&logo=googlechrome)](https://github.com/mqteooo317/Stats-Plugin-PM5)
+[![Plugin](https://img.shields.io/badge/Repository-Plugin-FF4500?style=for-the-badge&logo=googlechrome)](https://github.com/mqteooo317/Stats-Plugin-PM5)
 
 ## Purpose
 This system provides a centralized API and web interface for tracking player metrics (kills and deaths). It is specifically designed for integration with Minecraft Bedrock and Java Edition plugins to manage global server leaderboards.
